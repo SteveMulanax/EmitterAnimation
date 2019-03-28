@@ -1,0 +1,215 @@
+# emitter_demo.yml
+#
+# By Steve Mulanax 3/28/2019
+#
+# This is a BiblioPixel project that demonstrates the Emitter()
+# animation class that I developed for BiblioPixel. That class is
+# located in emitter.py. The demo is intended to be run on the
+# 45-pixel strip layout that I folded into a star shape, but it
+# will work on any strip that has at least 45 pixels. You can
+# also run this demo with the SimPixel driver using the
+# simpixel_star45.yml header:
+#
+# Command line:
+# bp simpixel_star45.yml + emitter_demo.yml
+#
+# I've got a video of this demo on YouTube:
+# https://www.youtube.com/watch?v=_UtHC1IhKxg
+
+palettes:
+  rocket: ['gold 4', [70,10,0], 'red 4']
+  blues:  [ 
+            [130, 130, 227],
+            [46, 46, 209],
+            [25, 25, 112],
+            [18, 18, 84],
+            [14, 14, 63],
+            [9, 9, 42],
+            [5, 5, 21], 
+          ]
+  violets: [
+            [223, 128, 255],
+            [191, 0, 255],
+            [115, 0, 153],
+            [77, 0, 102],
+            [57, 0, 77],
+            [38, 0, 51],
+            [19, 0, 26],
+           ]
+
+animation:
+  typename: sequence
+  length:   15
+
+  animations:
+
+  # Outward
+  - typename: emitter.Emitter
+    palette:  rocket
+    bgcolor:  [0, 0, 2] # deep blue
+    emitters: [ 
+                [ 4.5, -1, 0, 4.5, null, null],
+                [ 4.5,  1, 0, 4.5, null, null],
+                [13.5, -1, 0, 4.5, null, null],
+                [13.5,  1, 0, 4.5, null, null],
+                [22.5, -1, 0, 4.5, null, null],
+                [22.5,  1, 0, 4.5, null, null],
+                [31.5, -1, 0, 4.5, null, null],
+                [31.5,  1, 0, 4.5, null, null],
+                [40.5, -1, 0, 4.5, null, null],
+                [40.5,  1, 0, 4.5, null, null],
+              ]
+    aperture: 0.75
+    starts_at_once: 4
+    flare_prob: 0
+    bd_mean: -64
+    vel_mu: 0.5
+    vel_sigma: 0.125
+
+  # Blue Sparkles - Stationary
+  - typename: emitter.Emitter
+    palette:  blues 
+    bgcolor:  [0, 0, 2] # deep blue
+    emitters: [
+                [ 0, 0, 0, 5, null, null],
+                [ 9, 0, 0, 5, null, null],
+                [18, 0, 0, 5, null, null],
+                [27, 0, 0, 5, null, null],
+                [36, 0, 0, 5, null, null],
+              ]
+    flare_prob: 0
+    bd_mean: -50
+    vel_mu: 0.5
+    vel_sigma: 0.125
+
+  # Defaults - All that glitters is gold
+  - typename: emitter.Emitter
+
+  # Three comets
+  - typename: emitter.Emitter
+    palette:  rocket
+    bgcolor:  [0, 0, 2] # deep blue
+    emitters: [
+                [ 0, -1, 0.25, 5, null, null],
+                [15, -1, 0.25, 5, null, null],
+                [30, -1, 0.25, 5, null, null],
+              ]
+    aperture: 0.75
+    starts_at_once: 3
+    bd_mean: -80
+    bd_mu: 10
+    vel_mu: 0.75
+
+  # Violet Sparkles - Moving Emitters
+  - typename: emitter.Emitter
+    palette:  violets
+    bgcolor:  [2, 0, 2] # deep violet
+    emitters: [ [ 0, 0, 0.25, 5, null, null],
+                [ 9, 0, 0.25, 5, null, null],
+                [18, 0, 0.25, 5, null, null],
+                [27, 0, 0.25, 5, null, null],
+                [36, 0, 0.25, 5, null, null]  ]
+    starts_at_once: 4
+    flare_prob: 0
+    bd_mean: -64
+    vel_mu: 0.5
+    vel_sigma: 0.125
+
+  # Comet
+  - typename: emitter.Emitter
+    palette:  rocket # Overridden by blues
+    bgcolor:  [0, 0, 2] # deep blue
+    emitters: [ [0, -1, 0.5, 10, 200, blues] ]
+    aperture: 0.75
+    starts_at_once: 5
+    bd_mean: -32
+    bd_mu: 10
+
+  # Five Crayons Individual emitter palettes
+  - typename: emitter.Emitter
+    emitters: [
+                [ 0, 0, 0.25, 5, null, 'red'   ],
+                [ 9, 0, 0.25, 5, null, 'yellow'],
+                [18, 0, 0.25, 5, null, 'green' ],
+                [27, 0, 0.25, 5, null, 'blue'  ],
+                [36, 0, 0.25, 5, null, 'purple'],
+              ]
+    aperture: 1.0
+    starts_at_once: 4
+    flare_prob: 0
+    bd_mean: -64
+    vel_mu: 0.5
+    vel_sigma: 0.125
+
+  # Red, white, and blue
+  - typename: emitter.Emitter
+    palette:  blues
+    bgcolor:  [0, 0, 2] # deep blue
+    emitters: [ [ 0, 0, 0.25, 5, [255,0,0], null],
+                [ 9, 0, 0.25, 5, [255,0,0], null],
+                [18, 0, 0.25, 5, [255,0,0], null],
+                [27, 0, 0.25, 5, [255,0,0], null],
+                [36, 0, 0.25, 5, [255,0,0], null]  ]
+    starts_at_once: 4
+    flare_prob: 0
+    bd_mean: -64
+    vel_mu: 0.5
+    vel_sigma: 0.125
+
+  # Pulsating
+  - typename: emitter.Emitter
+    palette:  rocket
+    bgcolor:  [0, 0, 2] # deep blue
+    emitters: [
+                [ 0, 0, 0.25, 5, null, null],
+                [ 9, 0, 0.25, 5, null, null],
+                [18, 0, 0.25, 5, null, null],
+                [27, 0, 0.25, 5, null, null],
+                [36, 0, 0.25, 5, null, null],
+              ]
+    starts_at_once: 4
+    flare_prob: 0
+    bd_mean: -64
+
+  # Star War
+  - typename: emitter.Emitter
+    emitters: [
+                [ 0, 0, 0, 9, 'red'   , 'red'   ],
+                [ 9, 0, 0, 9, 'yellow', 'yellow'],
+                [18, 0, 0, 9, 'green' , 'green' ],
+                [27, 0, 0, 9, 'blue'  , 'blue'  ],
+                [36, 0, 0, 9, 'purple', 'purple'],
+              ]
+    starts_at_once: 1
+    starts_prob: .08
+    flare_prob: 0
+    bd_mean: -64
+
+  # Long range blend
+  - typename: emitter.Emitter
+    emitters: [
+                [ 0, -1, 0, 15, null, 'red'   ],
+                [ 9, -1, 0, 15, null, 'yellow'],
+                [18, -1, 0, 15, null, 'green' ],
+                [27, -1, 0, 15, null, 'blue'  ],
+                [36, -1, 0, 15, null, 'purple'],
+              ]
+    aperture: 1.0
+    starts_at_once: 2
+    bd_mu: 10
+    vel_mu: 0.5
+
+  # Blender
+  - typename: emitter.Emitter
+    emitters: [
+                [ 0, -1, 0.25, 15, null, 'red'   ],
+                [ 9, -1, 0.25, 15, null, 'yellow'],
+                [18, -1, 0.25, 15, null, 'green' ],
+                [27, -1, 0.25, 15, null, 'blue'  ],
+                [36, -1, 0.25, 15, null, 'purple'],
+              ]
+    aperture: 1.0
+    starts_at_once: 2
+    bd_mu: 10
+    vel_mu: 0.5
+

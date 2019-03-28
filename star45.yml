@@ -1,0 +1,29 @@
+# star45.yml
+#
+# By Steve Mulanax 3/28/2019
+#
+# This is a  BiblioPixel project "header" that describes the 45-pixel
+# strip layout that I've assembled into a star shape. It uses the 
+# serial driver for Manaical Labs' AllPixelMini board that I'm using.
+#
+# If your layout is different, you'll need to change this file.
+#
+# I'm using the 3-wire BTF-5V-30L-B RGB pixel strips from BTF-LIGHTING.
+# These have WS2812B pixels every 33.3mm. The LED ordering is GRB.
+#
+# I made these 3D printable "Star Strips" to support the pixel strips:
+# https://www.tinkercad.com/things/cjaSg81hieY-star-strip-v10 
+#
+# I've got a demo for this setup on YouTube:
+# https://www.youtube.com/watch?v=_UtHC1IhKxg
+
+shape: 45
+
+driver:
+  typename: serial
+  ledtype:  WS2812B
+  #gamma:    DEFAULT # gamma=1, lower_bound=0, offset=0
+  #gamma:    WS2812B # gamma=1/0.45 (2.22), lower_bound=0, offset=0
+  gamma:    [1,0,0]
+  c_order:  GRB
+
