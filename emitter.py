@@ -6,7 +6,7 @@ from numpy import random, concatenate
 """
 Emitter animation
 
-By Steve Mulanax 3/28/2019
+By Steve Mulanax 4/1/2019
 
 A strip animation with particle system emitters.
 
@@ -74,8 +74,8 @@ class Emitter(Strip):
                 self.bd_mean - self.bd_mu, self.bd_sigma, 16).astype(int),
             # These values will brighten the particles
             random.normal(
-                self.bd_mean + self.bd_mu, self.bd_sigma, 16).astype(int),
-            ), axis=0)
+                self.bd_mean + self.bd_mu, self.bd_sigma, 16).astype(int)),
+            axis=0)
 
     def make_vel(self):
         "Make a set of velocities to be randomly chosen for emitted particles"
@@ -122,7 +122,7 @@ class Emitter(Strip):
             if e_dir is None:
                 e_dir = 1
             if e_range is None:
-                e_range = self._end + 1
+                e_range = self._size
             if e_vel is None:
                 e_vel = 0
             if e_vel != 0:
@@ -245,7 +245,7 @@ class Emitter(Strip):
     def start_new_particles(self):
         """
         Start some new particles from the emitters. We roll the dice
-        starts_at_once times, seing if we can start each particle based
+        starts_at_once times, seeing if we can start each particle based
         on starts_prob. If we start, the particle gets a color form
         the palette and a velocity from the vel list.
         """
@@ -258,7 +258,7 @@ class Emitter(Strip):
                     self.particles.append((
                         p_vel,  # Velocity
                         e_pos,  # Position
-                        e_range // abs(p_vel),  # Particle's steps to live
+                        int(e_range // abs(p_vel)),  # steps to live
                         e_pal[
                             random.choice(len(e_pal))],  # Color
                         255))  # Brightness
